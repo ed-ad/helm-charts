@@ -33,5 +33,11 @@ spec:
               mountPath: /storage
       volumes:
         - name: storage
+          {{- if eq .Values.storage.type "hostPath" }}
+          hostPath:
+            path: {{ .Values.storage.hostPath.path | quote }}
+            type: {{ .Values.storage.hostPath.type | quote }}
+          {{- else }}
           persistentVolumeClaim:
             claimName: {{ include "_.fullname" . }}
+          {{- end }}

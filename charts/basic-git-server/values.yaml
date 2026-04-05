@@ -11,3 +11,21 @@ image:
 
 ingress:
   host: git.example.com
+
+# Storage configuration
+storage:
+  # Volume type: "pvc" for PersistentVolumeClaim or "hostPath" for host directory
+  type: pvc
+  
+  # PVC configuration (used when type is "pvc")
+  pvc:
+    enabled: true
+    size: 10Mi
+  
+  # HostPath configuration (used when type is "hostPath")
+  hostPath:
+    enabled: false
+    # Path on the host machine where repositories will be stored
+    path: /tmp/git-repos
+    # Type of hostPath volume (Directory, DirectoryOrCreate, File, FileOrCreate, Socket, CharDevice, BlockDevice)
+    type: DirectoryOrCreate
